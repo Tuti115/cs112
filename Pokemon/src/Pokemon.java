@@ -166,8 +166,11 @@ public class Pokemon
         String type1 = "Electric";
         String type2 = null;
         int level = 88;
+        boolean isSpecial = true;
+        boolean notSpecial = false;
 
-        int HP, attack, defense, specialAttack, specialDef, speed;
+        int HP;
+        double attack, defense, specialAttack, specialDef, speed;
 
         HP = rand.nextInt(243) + 211;
         attack = rand.nextInt(202) + 166;
@@ -177,7 +180,21 @@ public class Pokemon
         specialDef = rand.nextInt(173) + 142;
         speed = rand.nextInt(270) + 221;
 
-        getMovelist().add(new Move("Volt Tackle", "Electric", ))
+        Move move1 = new Move("Volt Tackle", "Electric", 120, isSpecial,
+                                0.33, 15, 1, 1.5, 344);
+        Move move2 = new Move("Thunderbolt", "Electric", 90, isSpecial,
+                0.0, 15, 1, 1.5, 344);
+        Move move3 = new Move("Iron Tail", "Steel", 100, notSpecial,
+                0.0, 15, .75, 1.0, 231);
+        Move move4 = new Move("Quick Attack", "Normal", 40, notSpecial,
+                0.0, 30, 1, 1.0, 98);
+
+        ArrayList<Move> list = new ArrayList<>();
+
+        list.add(move1);
+        list.add(move2);
+        list.add(move3);
+        list.add(move4);
 
         Pokemon pikachu =  new Pokemon(name, type1, type2, level, HP, attack,
                 specialAttack, defense, specialDef, speed, list);
@@ -187,7 +204,91 @@ public class Pokemon
 
     }
 
+    public static Pokemon generateCharizard()
+    {
+        Random rand = new Random();
 
+        String name = "Charizard";
+        String type1 = "Fire";
+        String type2 = "Flying";
+        int level = 84;
+        boolean isSpecial = true;
+        boolean notSpecial = false;
+        int HP;
+        double attack, defense, specialAttack, specialDef, speed;
+
+        HP = rand.nextInt(327) + 290;
+        attack = rand.nextInt(247) + 202;
+        defense = rand.nextInt(236) + 193;
+
+        specialAttack = rand.nextInt(293) + 240;
+        specialDef = rand.nextInt(249) + 204;
+        speed = rand.nextInt(277) + 226;
+
+
+        Move move1 = new Move("Flamethrower", "Fire", 90, isSpecial,
+                0.0, 15, 1, 1.5, 53);
+        Move move2 = new Move("Fire Blast", "Fire",  110, isSpecial,
+                0.0, 5, .85, 1.5, 202);
+        Move move3 = new Move("Dragon Claw", "Dragon",  80, isSpecial,
+                0.0, 15, 1, 1.0, 337);
+        Move move4 = new Move("Aerial Ace", "Flying", 60, notSpecial,
+                0.0, 20, 2, 1.5, 332);
+
+        ArrayList<Move> list = new ArrayList<>();
+        list.add(move1);
+        list.add(move2);
+        list.add(move3);
+        list.add(move4);
+
+        Pokemon charizard= new Pokemon(name, type1, type2, level, HP, attack,
+                specialAttack, defense, specialDef, speed, list);
+
+        return charizard;
+    }
+
+    public static Pokemon generateBlastoise()
+    {
+        Random rand = new Random();
+
+        String name = "Blastoise";
+        String type1 = "Fire";
+        String type2 = "Flying";
+        int level = 84;
+        boolean isSpecial = true;
+        boolean notSpecial = false;
+        int HP;
+        double attack, defense, specialAttack, specialDef, speed;
+
+        HP = rand.nextInt(325) + 305;
+        attack = rand.nextInt(245) + 202;
+        defense = rand.nextInt(277) + 226;
+
+        specialAttack = rand.nextInt(249) + 204;
+        specialDef = rand.nextInt(286) + 234;
+        speed = rand.nextInt(236) + 196;
+
+
+        Move move1 = new Move("Surf", "Water", 90, isSpecial,
+                0.0, 15, 1, 1.5, 57);
+        Move move2 = new Move("Water Pulse", "Water",  60, isSpecial,
+                0.0, 20, 1, 1.5, 352);
+        Move move3 = new Move("Ice Beam", "Ice",  90, isSpecial,
+                0.0, 10, 1, 1.0, 58);
+        Move move4 = new Move("Hydro Canon", "Water", 150, isSpecial,
+                0.0, 25, .8, 1.5, 75);
+
+        ArrayList<Move> list = new ArrayList<>();
+        list.add(move1);
+        list.add(move2);
+        list.add(move3);
+        list.add(move4);
+
+        Pokemon blastoise = new Pokemon(name, type1, type2, level, HP, attack,
+                specialAttack, defense, specialDef, speed, list);
+
+        return blastoise;
+    }
 
     public static Pokemon generateVenasaur()
     {

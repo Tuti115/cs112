@@ -51,6 +51,10 @@ public class Player
     public static Player initializePlayerRed()
     {
 
+        Pokemon charizard = Pokemon.generateChar
+
+
+
 
 
         Player red = new Player();
