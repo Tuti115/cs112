@@ -64,7 +64,7 @@ public class Battle
 
         attackerlvl = attacker.getLevel();
         power = move.getPower();
-        stab = move.getSTAB();
+        stab = move.getStab();
         random = (rand.nextInt(100) + 85) / 100; //need to get a decimal
 
         if(!move.getIsSpecial())

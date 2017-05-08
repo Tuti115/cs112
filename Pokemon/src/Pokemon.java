@@ -10,12 +10,12 @@ public class Pokemon
     private int level;
 
     private int HP;
-    private int attack;
-    private int special_attack;
+    private double attack;
+    private double special_attack;
 
-    private int defense;
-    private int special_defense;
-    private int speed;
+    private double defense;
+    private double special_defense;
+    private double speed;
 
 
 
@@ -43,24 +43,24 @@ public class Pokemon
     {
         return this.HP;
     }
-    public int getSpeed()
+    public double getSpeed()
     {
         return this.speed;
     }
 
-    public int getAttack()
+    public double getAttack()
     {
         return this.attack;
     }
-    public int getSpecial_attack()
+    public double getSpecial_attack()
     {
         return this.special_attack;
     }
-    public int getDefense()
+    public double getDefense()
     {
         return this.defense;
     }
-    public int getSpecial_defense()
+    public double getSpecial_defense()
     {
         return this.special_defense;
     }
@@ -91,24 +91,24 @@ public class Pokemon
     {
         this.HP = HP;
     }
-    public void setSpeed(int speed)
+    public void setSpeed(double speed)
     {
         this.speed = speed;
     }
 
-    public void setAttack(int attack)
+    public void setAttack(double attack)
     {
         this.attack = attack;
     }
-    public void setSpecial_attack(int special_attack)
+    public void setSpecial_attack(double special_attack)
     {
         this.special_attack = special_attack;
     }
-    public void setDefense(int defense)
+    public void setDefense(double defense)
     {
         this.defense = defense;
     }
-    public void setSpecial_defense(int special_defense)
+    public void setSpecial_defense(double special_defense)
     {
         this.special_defense = special_defense;
     }
@@ -138,8 +138,8 @@ public class Pokemon
     }
 
     public Pokemon(String name, String type1, String type2, int level,
-                   int HP, int attack, int special_attack,int defense,
-                   int special_defense, int speed, ArrayList<Move> list)
+                   int HP, double attack, double special_attack, double defense,
+                   double special_defense, double speed, ArrayList<Move> list)
     {
         this.name = name;
         this.type1= type1;
@@ -158,17 +158,6 @@ public class Pokemon
 
     }
 
-    //toString
-    public String toString()
-    {
-        return "Pokemon: " + getName() + "\nType 1: " + getType1() + "\nType 2: " + getType2() +
-                "\nLevel: " + getLevel() + "\nHP: " + getHP() + "\nSpeed: "  + getSpeed() +
-                "\nattack: " + getAttack() + "\nSpecial attack: " + getSpecial_attack() + "\nDefense: " + getDefense() +
-                "\nSpecial Defense: " + getSpecial_defense() + "\nSpeed: " + getSpeed() + "\nMove 1: " + getMovelist().get(0) +
-                "Move 2: " + getMovelist().get(1) + "\nMove 3: " + getMovelist().get(2) + "\nMove 3: " + getMovelist().get(3);
-
-    }
-    /*
     public Pokemon generatePikachu()
     {
         Random rand = new Random();
@@ -188,16 +177,18 @@ public class Pokemon
         specialDef = rand.nextInt(173) + 142;
         speed = rand.nextInt(270) + 221;
 
-        //getMovelist().add(new Move("Volt Tackle", "Electric", ))
+        getMovelist().add(new Move("Volt Tackle", "Electric", ))
 
-        //Pokemon pikachu = new Pokemon(name, type1, type2, level, HP, attack, specialAttack, defense, specialDef, speed, )
-        //return pikachu;
+        Pokemon pikachu =  new Pokemon(name, type1, type2, level, HP, attack,
+                specialAttack, defense, specialDef, speed, list);
+
+        return pikachu;
 
 
     }
-    */
 
-<<<<<<< HEAD
+
+
     public static Pokemon generateVenasaur()
     {
         Random rand = new Random();
@@ -338,6 +329,5 @@ public class Pokemon
                 "\nMove 3: " + getMovelist().get(3).getMove_name();
 
     }
-=======
->>>>>>> parent of 108db98... Continued work on classe: move.java, player.java, pokemon.java
+
 }

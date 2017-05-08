@@ -53,7 +53,7 @@ public class Player
 
 
 
-        Player red = new Player(); //not complete
+        Player red = new Player();
         return red ;
     }
 
