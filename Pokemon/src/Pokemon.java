@@ -9,15 +9,14 @@ public class Pokemon
     private String type2;
     private int level;
 
-    private int HP;
+    private int currentHP;
+    private int baseHP;
     private double attack;
     private double special_attack;
 
     private double defense;
     private double special_defense;
-    private double speed;
-
-
+    private int speed;
 
     private ArrayList<Move> movelist = new ArrayList<>();
 
@@ -39,11 +38,15 @@ public class Pokemon
     {
         return this.level;
     }
-    public int getHP()
+    public int getCurrentHP()
     {
-        return this.HP;
+        return this.currentHP;
     }
-    public double getSpeed()
+    public int getbaseHP()
+    {
+        return this.baseHP;
+    }
+    public int getSpeed()
     {
         return this.speed;
     }
@@ -87,11 +90,16 @@ public class Pokemon
     {
         this.level = level;
     }
-    public void setHP(int HP)
+    public void setCurrentHP(int hp)
     {
-        this.HP = HP;
+        this.currentHP  = hp;
     }
-    public void setSpeed(double speed)
+
+    public void setBaseHP(int baseHP)
+    {
+        this.baseHP = baseHP;
+    }
+    public void setSpeed(int speed)
     {
         this.speed = speed;
     }
@@ -126,7 +134,8 @@ public class Pokemon
         this.type2= null;
         this.level = 5;
 
-        this.HP = 1;
+        this.currentHP = 1;
+        this.baseHP = 1;
         this.attack = 1;
         this.special_attack = 1;
 
@@ -138,15 +147,16 @@ public class Pokemon
     }
 
     public Pokemon(String name, String type1, String type2, int level,
-                   int HP, double attack, double special_attack, double defense,
-                   double special_defense, double speed, ArrayList<Move> list)
+                   int currentHP, int HP, double attack, double special_attack, double defense,
+                   double special_defense, int speed, ArrayList<Move> list)
     {
         this.name = name;
         this.type1= type1;
         this.type2= type2;
         this.level = level;
 
-        this.HP = HP;
+        this.currentHP = currentHP;
+        this.baseHP = HP;
         this.attack = attack;
         this.special_attack = special_attack;
 
@@ -158,7 +168,8 @@ public class Pokemon
 
     }
 
-    public Pokemon generatePikachu()
+    /* Generation of Pokemons */
+    public static Pokemon generatePikachu()
     {
         Random rand = new Random();
 
@@ -169,10 +180,12 @@ public class Pokemon
         boolean isSpecial = true;
         boolean notSpecial = false;
 
-        int HP;
-        double attack, defense, specialAttack, specialDef, speed;
+        int baseHP, currentHP, speed;
+        double attack, defense, specialAttack, specialDef;
 
-        HP = rand.nextInt(243) + 211;
+        baseHP = rand.nextInt(243) + 211;
+        currentHP = baseHP;
+
         attack = rand.nextInt(202) + 166;
         defense = rand.nextInt(154) + 126;
 
@@ -196,7 +209,7 @@ public class Pokemon
         list.add(move3);
         list.add(move4);
 
-        Pokemon pikachu =  new Pokemon(name, type1, type2, level, HP, attack,
+        Pokemon pikachu =  new Pokemon(name, type1, type2, level, currentHP, baseHP, attack,
                 specialAttack, defense, specialDef, speed, list);
 
         return pikachu;
@@ -214,10 +227,11 @@ public class Pokemon
         int level = 84;
         boolean isSpecial = true;
         boolean notSpecial = false;
-        int HP;
-        double attack, defense, specialAttack, specialDef, speed;
+        int HP, current, speed;
+        double attack, defense, specialAttack, specialDef;
 
         HP = rand.nextInt(327) + 290;
+        current =  HP;
         attack = rand.nextInt(247) + 202;
         defense = rand.nextInt(236) + 193;
 
@@ -241,7 +255,7 @@ public class Pokemon
         list.add(move3);
         list.add(move4);
 
-        Pokemon charizard= new Pokemon(name, type1, type2, level, HP, attack,
+        Pokemon charizard= new Pokemon(name, type1, type2, level, current, HP, attack,
                 specialAttack, defense, specialDef, speed, list);
 
         return charizard;
@@ -257,10 +271,11 @@ public class Pokemon
         int level = 84;
         boolean isSpecial = true;
         boolean notSpecial = false;
-        int HP;
-        double attack, defense, specialAttack, specialDef, speed;
+        int HP, current, speed;
+        double attack, defense, specialAttack, specialDef;
 
         HP = rand.nextInt(325) + 305;
+        current  = HP;
         attack = rand.nextInt(245) + 202;
         defense = rand.nextInt(277) + 226;
 
@@ -284,7 +299,7 @@ public class Pokemon
         list.add(move3);
         list.add(move4);
 
-        Pokemon blastoise = new Pokemon(name, type1, type2, level, HP, attack,
+        Pokemon blastoise = new Pokemon(name, type1, type2, level, current, HP, attack,
                 specialAttack, defense, specialDef, speed, list);
 
         return blastoise;
@@ -300,10 +315,11 @@ public class Pokemon
         int level = 84;
         boolean isSpecial = true;
         boolean notSpecial = false;
-        int HP;
-        double attack, defense, specialAttack, specialDef, speed;
+        int HP, current, speed;
+        double attack, defense, specialAttack, specialDef;
 
         HP = rand.nextInt(327) + 280;
+        current = HP;
         attack = rand.nextInt(243) + 199;
         defense = rand.nextInt(245) + 201;
 
@@ -327,7 +343,7 @@ public class Pokemon
         list.add(move3);
         list.add(move4);
 
-        Pokemon venasaur = new Pokemon(name, type1, type2, level, HP, attack,
+        Pokemon venasaur = new Pokemon(name, type1, type2, level, current, HP, attack,
                 specialAttack, defense, specialDef, speed, list);
 
         return venasaur;
@@ -343,10 +359,11 @@ public class Pokemon
         int level = 85;
         boolean isSpecial = true;
         boolean notSpecial = false;
-        int HP;
-        double attack, defense, specialAttack, specialDef, speed;
+        int HP, current, speed;
+        double attack, defense, specialAttack, specialDef;
 
         HP = rand.nextInt(340) + 320;
+        current = HP;
         attack = rand.nextInt(343) + 281;
         defense = rand.nextInt(271) + 221;
 
@@ -369,7 +386,7 @@ public class Pokemon
         list.add(move3);
         list.add(move4);
 
-        Pokemon dragonite = new Pokemon(name, type1, type2, level, HP, attack,
+        Pokemon dragonite = new Pokemon(name, type1, type2, level, current, HP, attack,
                 specialAttack, defense, specialDef, speed, list);
 
         return dragonite;
@@ -385,10 +402,11 @@ public class Pokemon
         int level = 85;
         boolean isSpecial = true;
         boolean notSpecial = false;
-        int HP;
-        double attack, defense, specialAttack, specialDef, speed;
+        int HP, current, speed;
+        double attack, defense, specialAttack, specialDef;
 
         HP = rand.nextInt(354) + 334;
+        current  = HP;
         attack = rand.nextInt(281) + 230;
         defense = rand.nextInt(246) + 201;
 
@@ -411,19 +429,24 @@ public class Pokemon
         list.add(move3);
         list.add(move4);
 
-        Pokemon mewtwo = new Pokemon(name, type1, type2, level, HP, attack,
+        Pokemon mewtwo = new Pokemon(name, type1, type2, level, current, HP, attack,
                 specialAttack, defense, specialDef, speed, list);
 
         return mewtwo;
     }
 
+    /* Methods */
+    public void addHP(int hp)
+    {
+        this.currentHP += hp;
+    }
 
 
     //toString
     public String toString()
     {
         return "Pokemon: " + getName() + "\nType 1: " + getType1() + "\nType 2: " + getType2() +
-                "\nLevel: " + getLevel() + "\nHP: " + getHP() + "\nSpeed: "  + getSpeed() + "\nattack: " + getAttack() +
+                "\nLevel: " + getLevel() + "\nHP: " + getbaseHP() + "\nSpeed: "  + getSpeed() + "\nattack: " + getAttack() +
                 "\nSpecial attack: " + getSpecial_attack() + "\nDefense: " + getDefense() + "\nSpecial Defense: " +
                 getSpecial_defense() + "\nSpeed: " + getSpeed() + "\nMove 1: " + getMovelist().get(0).getMove_name() +
                 "Move 2: " + getMovelist().get(1).getMove_name() + "\nMove 3: " + getMovelist().get(2).getMove_name() +

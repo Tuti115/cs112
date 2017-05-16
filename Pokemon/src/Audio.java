@@ -3,7 +3,7 @@ import java.io.File;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.AudioSystem;
 
-public class PokemonAudio implements Runnable
+public class Audio implements Runnable
 {
 
     /* Initializations */
@@ -24,12 +24,12 @@ public class PokemonAudio implements Runnable
     }
 
     /* Constructors */
-    public PokemonAudio()
+    public Audio()
     {
         this.decision = 0;
     }
 
-    public PokemonAudio(int decision)
+    public Audio(int decision)
     {
 
     }

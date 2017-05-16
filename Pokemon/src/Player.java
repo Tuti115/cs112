@@ -50,14 +50,25 @@ public class Player
     /* Methods */
     public static Player initializePlayerRed()
     {
+        ArrayList<Pokemon> pokelist = new ArrayList<>();
+        ArrayList<Item> itemlist = new ArrayList<>();
 
-        Pokemon charizard = Pokemon.generateChar
+        Pokemon pikachu = Pokemon.generatePikachu();
+        Pokemon charizard = Pokemon.generateCharizard();
+        Pokemon blastoise = Pokemon.generateBlastoise();
 
+        Pokemon venasaur = Pokemon.generateVenasaur();
+        Pokemon dragonite = Pokemon.generateDragonite();
 
+        pokelist.add(pikachu);
+        pokelist.add(charizard);
+        pokelist.add(blastoise);
 
+        pokelist.add(venasaur);
+        pokelist.add(dragonite);
 
+        Player red = new Player("Red", pokelist, itemlist);
 
-        Player red = new Player();
         return red ;
     }
 
