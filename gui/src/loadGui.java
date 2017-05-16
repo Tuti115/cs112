@@ -25,19 +25,20 @@ public class loadGui extends JFrame
 	int stat;
 	public loadGui()
 	{
-		super("Income tax calculator");
+		super("Income tax calc");
  
 		
 		
 		setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLayout(new BorderLayout());
+		panel1.setLayout(new BoxLayout(panel1, BoxLayout.PAGE_AXIS));
+		panel2.setLayout(new BoxLayout(panel2, BoxLayout.PAGE_AXIS));
+		panel3.setLayout(new BoxLayout(panel3, BoxLayout.PAGE_AXIS));
 		buildPanel();
 		add(panel1, BorderLayout.WEST);
 		add(panel2, BorderLayout.CENTER);
 		add(panel3, BorderLayout.EAST);
-		
 		setVisible(true);
 	}
 	//private JLabel
@@ -60,7 +61,7 @@ public class loadGui extends JFrame
 		staz.add(new JRadioButtonMenuItem("thing1"));
 		
 		
-		textInput = new JTextField(10);
+		textInput = textField();
 		// Add an action listener to the button
 		calcButton.addActionListener(new CalcButtonListener());
 		
@@ -70,6 +71,7 @@ public class loadGui extends JFrame
 	
 		// Add the label, text field, and button to the panel
 		panel2.add(new JLabel("Taxable Income"));
+		
 		panel2.add(textInput);
 		panel2.add(calcButton);
 		panel2.add(new JLabel("Income Tax"));
@@ -89,6 +91,21 @@ public class loadGui extends JFrame
 		
 		
 	}
+	
+	private JTextField textField()
+	{
+		int width = 100;
+		int height = 20;
+		JTextField textField = new JTextField(1);
+		textField.setMinimumSize(new Dimension(width, height));
+		textField.setPreferredSize(new Dimension(width, height));
+		textField.setMaximumSize(new Dimension(width, height));
+		
+		
+		return(textField);
+	}
+	
+	
 		private class CalcButtonListener implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e)
