@@ -23,12 +23,9 @@ public class TestGame
 {
     public static void main(String[] args)
     {
-        Battle battle = new Battle();
+        Audio play = new Audio(1);
 
-        Player red = Player.initializePlayerRed();
-        Pokemon mewtwo = Pokemon.generateMewtwo();
-
-        battle.wildBattle(red, mewtwo);
+        play.run();
 
     }
 

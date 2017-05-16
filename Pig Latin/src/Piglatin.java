@@ -5,7 +5,7 @@ public class Piglatin
 {
     public static String userInput(String userinput)
     {
-        String temp = null;
+        String temp = "";
         userinput = userinput.toLowerCase();
 
         String[] holder = userinput.split(" ");
@@ -64,8 +64,5 @@ public class Piglatin
     {
         PiglatinGUI event = new PiglatinGUI();
     }
-
-
-
 
 }

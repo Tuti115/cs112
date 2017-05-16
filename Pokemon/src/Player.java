@@ -72,6 +72,7 @@ public class Player
         return red ;
     }
 
+    /*
 
     public boolean atLeastOnePokeAlive()
     {
@@ -88,5 +89,5 @@ public class Player
 
 
 
-
+*/
 }

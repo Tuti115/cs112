@@ -82,6 +82,7 @@ public class Battle
 
     }
 
+    /*
     public boolean isWildBattleOver(Player player, Pokemon wild)
     {
         boolean teamFainted = true;
@@ -102,7 +103,7 @@ public class Battle
             index++;
         }
 
-        obj = wild.
+       // obj = wild.
 
 
 
@@ -110,7 +111,7 @@ public class Battle
 
 
     }
-
+*/
 
 
 
