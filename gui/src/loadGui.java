@@ -18,26 +18,34 @@ public class loadGui extends JFrame
 	private JCheckBox child; 
 	private JCheckBox dog;
 	private JCheckBox blind;  
-	private JRadioButtonMenuItem staz;
+	private JRadioButton single = new JRadioButton( "Single");
+	private JRadioButton married= new JRadioButton("Married");
+	private JRadioButton head= new JRadioButton("Single, head of house");
 	private final int WINDOW_WIDTH = 500;
 	private final int WINDOW_HEIGHT = 300;
 	double status[] = {.28, .32, .22};
 	int stat;
 	public loadGui()
 	{
-		super("Income tax calculator");
+		super("Income tax calc");
  
 		
-		
+	
 		setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLayout(new BorderLayout());
+		panel1.setLayout(new BoxLayout(panel1, BoxLayout.PAGE_AXIS));
+		panel2.setLayout(new BoxLayout(panel2, BoxLayout.PAGE_AXIS));
+		panel3.setLayout(new BoxLayout(panel3, BoxLayout.PAGE_AXIS));
 		buildPanel();
+		
+		panel1.	setBackground(Color.WHITE);
+		panel2.	setBackground(Color.WHITE);
+		panel3.	setBackground(Color.WHITE);
 		add(panel1, BorderLayout.WEST);
 		add(panel2, BorderLayout.CENTER);
 		add(panel3, BorderLayout.EAST);
-		
+		setBackground(Color.WHITE);
 		setVisible(true);
 	}
 	//private JLabel
@@ -54,49 +62,78 @@ public class loadGui extends JFrame
 		child = new JCheckBox("Dependent Child");
 		dog = new JCheckBox("Three-legged dog");
 		blind = new JCheckBox("Blind Grandmother");
+		ButtonGroup group = new ButtonGroup();
 		
-		staz = new JRadioButtonMenuItem("thing1");
-		staz.add(new JRadioButtonMenuItem("thing2"));
-		staz.add(new JRadioButtonMenuItem("thing1"));
+		messageLabel.setBackground(Color.WHITE);
+		textStuff.setBackground(Color.WHITE);
+		calcButton.setBackground(Color.WHITE);
+		self.setBackground(Color.WHITE);
+		child.setBackground(Color.WHITE);
+		dog.setBackground(Color.WHITE);
+		blind.setBackground(Color.WHITE);
 		
-		
-		textInput = new JTextField(10);
+		single.setSelected(true);
+		group.add(single);
+		group.add(married);
+		group.add(head);
+	
+		panel1.add(single);
+		panel1.add(married );
+		panel1.add(head );
+		textInput = textField();
 		// Add an action listener to the button
 		calcButton.addActionListener(new CalcButtonListener());
 		
 		// Create a panel to hold the components
 	
-		panel1.add(staz);
+	
+		//panel2.setLayout(new BoxLayout(panel2, BoxLayout.X_AXIS));
 	
 		// Add the label, text field, and button to the panel
 		panel2.add(new JLabel("Taxable Income"));
+	
 		panel2.add(textInput);
 		panel2.add(calcButton);
 		panel2.add(new JLabel("Income Tax"));
+		
+		
+		int width = 100;
+		int height = 20;
+	
+		textStuff.setMinimumSize(new Dimension(width, height));
+		textStuff.setPreferredSize(new Dimension(width, height));
+		textStuff.setMaximumSize(new Dimension(width, height));
+		
+		
 		panel2.add(textStuff);
+		
 		
 		panel3.add(self);
 		panel3.add(child);
 		panel3.add(dog);
 		panel3.add(blind);
 		
-	
-		
-		
-		
-		
-		
-		
 		
 	}
+	
+	private JTextField textField()
+	{
+		int width = 100;
+		int height = 20;
+		JTextField textField = new JTextField(1);
+		textField.setMinimumSize(new Dimension(width, height));
+		textField.setPreferredSize(new Dimension(width, height));
+		textField.setMaximumSize(new Dimension(width, height));
+		
+		
+		return(textField);
+	}
+	
+	
 		private class CalcButtonListener implements ActionListener
 	{
 		public void actionPerformed(ActionEvent e)
 		{
-			
-			
-			
-			
 			
 			String str;               // To hold text entered
 			double income;             // To hold miles
@@ -106,8 +143,8 @@ public class loadGui extends JFrame
 			// Get number of kilometers from the user. Input entered 
 			// in the text field is a string.
 			str = textInput.getText();
+
 			
-			// Convert the kilometers to miles
 			income = Double.parseDouble(str);
 				if(self.isSelected())
 			income -= 2000;
@@ -117,6 +154,14 @@ public class loadGui extends JFrame
 			income -= 2000;
 				if(blind.isSelected())
 			income -= 2000;
+			if(single.isSelected())
+				income = income * .28;
+			if(married.isSelected())
+				income = income * .32;
+			if(head.isSelected())
+				income = income * .22;
+					
+			
 			
 			textStuff.setText("" + income );
 			// Display a message dialog showing the miles
