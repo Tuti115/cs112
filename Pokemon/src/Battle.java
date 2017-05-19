@@ -5,9 +5,11 @@ import java.util.Random;
 
 public class Battle
 {
+    /* Declarations */
+    private boolean battle_over;
+
     /* Initializations */
     static Random r = new Random();
-
     private static double[][] TypeDamageModifiers =
         {{1.0, 1.0, 1.0, 1.0, 1.0, .5, 1.0, 0.0, .5, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0},
                 {2.0, 1.0, .5, .5, 1.0, 2.0, .5, 0.0, 2.0, 1.0 , 1.0, 1.0, 1.0, .5, 2.0, 1.0, 2.0},
@@ -28,28 +30,35 @@ public class Battle
                 {1.0, .5, 1.0, 1.0, 1.0, 1.0, 1.0, 2.0, .5, 1.0, 1.0, 1.0, 1.0, 2.0, 1.0, 1.0, .5}
 
             };
-
     private String[] type_names =
             {"Normal", "Fight", "Flying", "Poison", "Ground", "Rock", "Bug", "Ghost",
                     "Steel", "Fire", "Water", "Grass", "Electric", "Psychic", "Ice", "Dragon", "Dark"};
 
+    /* Accessor Methods */
+    public boolean getBattle_Over()
+    {
+        return this.battle_over;
+    }
+
+    /* Mutator Methods */
+    public void setBattle_over(boolean over)
+    {
+        this.battle_over = over;
+    }
 
     /* Methods */
-
-
     public void wildBattle(Player player, Pokemon wildPoke)
     {
+        setBattle_over(true);
 
-        boolean playerTeamAlive = true;
-        boolean wild = true;
         int activePoke = 0;
-
-        Thread t1 = new Thread(new Audio(1));
+        Thread t1 = new Thread(new Audio());
         t1.start();
 
-        while(playerTeamAlive && wild)
+        while(!getBattle_Over())
         {
 
+            userDecision();
 
 
 
@@ -82,7 +91,7 @@ public class Battle
 
     }
 
-    /*
+
     public boolean isWildBattleOver(Player player, Pokemon wild)
     {
         boolean teamFainted = true;
@@ -103,15 +112,18 @@ public class Battle
             index++;
         }
 
-       // obj = wild.
+        if(wild.getCurrentHP() > 1)
+            wildFainted = false;
 
 
+        if(wildFainted || teamFainted)
+        {
+            return true;
+        }
 
-
-
-
+        return false;
     }
-*/
+
 
 
 
@@ -143,6 +155,7 @@ public class Battle
                 break;
             case "Volt Tackle":
 
+
         }
     }
 
@@ -170,7 +183,7 @@ public class Battle
             defendstat = defender.getSpecial_defense();
         }
 
-        typemod = getTypeDamageModifierElement(attacker, move, defender);
+        typemod = getTypeDamageModifierElement(move, defender);
         critical = calculateCritical(attacker);
 
         modifier = stab * random * typemod * critical;
@@ -179,7 +192,7 @@ public class Battle
         return damage;
     }
 
-    public double getTypeDamageModifierElement(Pokemon attacker, Move move, Pokemon defender)
+    public double getTypeDamageModifierElement(Move move, Pokemon defender)
     {
         String attackType, defendType;
 
@@ -252,21 +265,5 @@ public class Battle
 
         return critical;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

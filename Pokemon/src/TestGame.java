@@ -11,21 +11,12 @@ Algorithm:
 
 * Class Pokemon:
 
-
-
-
-
-
-
-
  */
 public class TestGame
 {
     public static void main(String[] args)
     {
-        Audio play = new Audio(1);
-
-        play.run();
+        Gui event = new Gui();
 
     }
 

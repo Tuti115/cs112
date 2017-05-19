@@ -138,20 +138,4 @@ public class Move
         this.pp++;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
