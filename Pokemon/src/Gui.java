@@ -40,10 +40,9 @@ public class Gui extends JFrame
     public void buildPanel()
     {
 
-        label = new JLabel("Pokemon audio player");
+        label = new JLabel("Pokemon Battle");
         playbutton = new JButton("Play");
 
-        playbutton.addActionListener(new ButtonListener());
 
         panel = new JPanel();
 
@@ -51,14 +50,20 @@ public class Gui extends JFrame
         panel.add(playbutton);
     }
 
-    private class ButtonListener implements ActionListener
+    private class startGameButton implements ActionListener
     {
         public void actionPerformed(ActionEvent e)
         {
-            Audio audio = new Audio();
+            //Initializes player and computer opponent
+            Player player = Player.initializePlayerRed();
+            Pokemon mewtwo= Pokemon.generateMewtwo();
 
-            audio.run();
+            Battle battle = new Battle();
+            battle.wildBattle(player, mewtwo); //starts battle
         }
     }
+
+
+
 
 }

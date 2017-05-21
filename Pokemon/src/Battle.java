@@ -58,39 +58,14 @@ public class Battle
         while(!getBattle_Over())
         {
 
-            userDecision();
-
-
-
         }
     }
 
-    public void userDecision()
+
+    public void doRound()
     {
-        int decision = -1;
-
-        switch(decision)
-        {
-            case 0:
-                //ATTACK
-
-                break;
-            case 1:
-                //ITEMS
-                break;
-            case 2:
-                //POKeMON
-                break;
-            case 3:
-                //RUN
-            default:
-                //SHOULD NOT HIT
-
-        }
-
 
     }
-
 
     public boolean isWildBattleOver(Player player, Pokemon wild)
     {
@@ -123,9 +98,6 @@ public class Battle
 
         return false;
     }
-
-
-
 
     public boolean effectMove(Move move)
     {

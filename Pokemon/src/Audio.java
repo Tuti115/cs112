@@ -8,6 +8,7 @@ public class Audio implements Runnable
 
     /* Initializations */
     private int decision;
+    private Thread thread;
 
 
     /* Accessor Methods */
@@ -15,18 +16,34 @@ public class Audio implements Runnable
     {
         return this.decision;
     }
+    public Thread getThread()
+    {
+        return thread;
+    }
 
     /* Mutator Methods */
-
     public void setDecision(int decision)
     {
         this.decision = decision;
     }
+    public void endThread()
+    {
+        try
+        {
+            thread.join();
 
+        }
+        catch (InterruptedException e)
+        {
+            System.out.println("Error with joining thread.");
+            System.exit(0);
+        }
+
+    }
     /* Constructors */
     public Audio()
     {
-        this.decision = 0;
+        thread = new Thread();
     }
 
     public Audio(int decision)

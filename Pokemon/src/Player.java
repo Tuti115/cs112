@@ -72,22 +72,4 @@ public class Player
         return red ;
     }
 
-    /*
-
-    public boolean atLeastOnePokeAlive()
-    {
-        ArrayList<Pokemon> list = this.getPokemonList();
-
-        for(Pokemon mon : list)
-        {
-            if(mon.getHP() > 0)
-                return true;
-        }
-
-        return false;
-    }
-
-
-
-*/
 }
