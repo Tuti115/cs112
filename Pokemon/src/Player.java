@@ -57,7 +57,7 @@ public class Player
         Pokemon charizard = Pokemon.generateCharizard();
         Pokemon blastoise = Pokemon.generateBlastoise();
 
-        Pokemon venasaur = Pokemon.generateVenasaur();
+        Pokemon venasaur = Pokemon.generateVenusaur();
         Pokemon dragonite = Pokemon.generateDragonite();
 
         pokelist.add(pikachu);

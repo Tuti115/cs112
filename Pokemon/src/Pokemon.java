@@ -168,6 +168,26 @@ public class Pokemon
 
     }
 
+    /* Methods */
+    public String[] getMoveNames()
+    {
+        String[] moves = new String[4];
+        int counter= 0;
+
+        for(Move move: getMovelist())
+        {
+            moves[counter] = move.getMove_name();
+            counter++;
+        }
+
+        return moves;
+    }
+    public String passCurrentHP()
+    {
+        String hp = String.valueOf(getCurrentHP());
+        return hp;
+    }
+
     /* Generation of Pokemons */
     public static Pokemon generatePikachu()
     {
@@ -180,11 +200,11 @@ public class Pokemon
         boolean isSpecial = true;
         boolean notSpecial = false;
 
-        int baseHP, currentHP, speed;
+        int HP, currentHP, speed;
         double attack, defense, specialAttack, specialDef;
 
-        baseHP = rand.nextInt(243) + 211;
-        currentHP = baseHP;
+        HP = rand.nextInt(243) + 211;
+        currentHP = HP;
 
         attack = rand.nextInt(202) + 166;
         defense = rand.nextInt(154) + 126;
@@ -194,7 +214,9 @@ public class Pokemon
         speed = rand.nextInt(270) + 221;
 
         Move move1 = new Move("Volt Tackle", "Electric", 120, isSpecial,
-                                0.33, 15, 1, 1.5, 344);
+                                0.33, 15,
+
+                1, 1.5, 344);
         Move move2 = new Move("Thunderbolt", "Electric", 90, isSpecial,
                 0.0, 15, 1, 1.5, 344);
         Move move3 = new Move("Iron Tail", "Steel", 100, notSpecial,
@@ -209,7 +231,7 @@ public class Pokemon
         list.add(move3);
         list.add(move4);
 
-        Pokemon pikachu =  new Pokemon(name, type1, type2, level, currentHP, baseHP, attack,
+        Pokemon pikachu =  new Pokemon(name, type1, type2, level, currentHP, HP, attack,
                 specialAttack, defense, specialDef, speed, list);
 
         return pikachu;
@@ -305,11 +327,11 @@ public class Pokemon
         return blastoise;
     }
 
-    public static Pokemon generateVenasaur()
+    public static Pokemon generateVenusaur()
     {
         Random rand = new Random();
 
-        String name = "Venasaur";
+        String name = "Venusaur";
         String type1 = "Grass";
         String type2 = "Poison";
         int level = 84;
@@ -343,10 +365,10 @@ public class Pokemon
         list.add(move3);
         list.add(move4);
 
-        Pokemon venasaur = new Pokemon(name, type1, type2, level, current, HP, attack,
+        Pokemon venusaur = new Pokemon(name, type1, type2, level, current, HP, attack,
                 specialAttack, defense, specialDef, speed, list);
 
-        return venasaur;
+        return venusaur;
     }
 
     public static Pokemon generateDragonite()
@@ -405,7 +427,7 @@ public class Pokemon
         int HP, current, speed;
         double attack, defense, specialAttack, specialDef;
 
-        HP = rand.nextInt(354) + 334;
+        HP = rand.nextInt(354) + 300;
         current  = HP;
         attack = rand.nextInt(281) + 230;
         defense = rand.nextInt(246) + 201;

@@ -5,10 +5,9 @@ import javax.sound.sampled.AudioSystem;
 
 public class Audio implements Runnable
 {
-
     /* Initializations */
     private int decision;
-    private Thread thread;
+    public static Thread thread = new Thread();
 
 
     /* Accessor Methods */
@@ -46,21 +45,17 @@ public class Audio implements Runnable
         thread = new Thread();
     }
 
-    public Audio(int decision)
-    {
-
-    }
-
     /* Methods */
     public void run()
     {
         try
         {
+
             playBattleMusic();
         }
         catch (Exception e)
         {
-            System.out.println("error.");
+            System.out.println("Error with audio thread.");
             System.exit(0);
         }
 
@@ -68,7 +63,7 @@ public class Audio implements Runnable
 
     public static void playBattleMusic()
     {
-        File battlemusic = new File("Pokemon_Emerald_Wild_Battle.wav");
+        File battlemusic = new File("Pokemon Files/Audio/EmeraldBattleMusic.wav");
 
         PlaySound(battlemusic);
 

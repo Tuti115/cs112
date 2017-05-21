@@ -47,20 +47,6 @@ public class Battle
     }
 
     /* Methods */
-    public void wildBattle(Player player, Pokemon wildPoke)
-    {
-        setBattle_over(true);
-
-        int activePoke = 0;
-        Thread t1 = new Thread(new Audio());
-        t1.start();
-
-        while(!getBattle_Over())
-        {
-
-        }
-    }
-
 
     public void doRound()
     {
