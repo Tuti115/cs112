@@ -95,7 +95,7 @@ public class Battle
         return false;
     }
 
-    /*
+
     public void doRound(Player player, Pokemon player_poke, Pokemon wild, int playerMove, int wildMove)
     {
         int random = r.nextInt(100 - 1) + 1;
@@ -103,6 +103,9 @@ public class Battle
         if((random % 2) == 0)
         {
             if (isWildBattleOver(player, wild))
+            {
+
+            }
 
         }
 
@@ -113,7 +116,7 @@ public class Battle
 
     }
 
-    */
+
 
     public void doMove(Pokemon attacker, int index, Pokemon defender)
     {
@@ -127,13 +130,14 @@ public class Battle
         switch(name)
         {
             case "Recover":
-                int random = r.nextInt(50) + 25 ;
+                int random = r.nextInt(50 - 2) + 25 ;
                 dRandom = random / 100;
 
                 modifier = (int) (attacker.getbaseHP() * dRandom);
 
                 attacker.addHP(modifier);
                 isSpecialMove = true;
+
                 break;
 
             case "Volt Tackle":
@@ -199,6 +203,9 @@ public class Battle
 
         modifier = stab * random * typemod * critical;
         damage = ((((((2 * attackerlvl) / 5) + 2) * power * (attackstat/defendstat)) / 50) + 2) * modifier;
+
+        move.decrementPP();
+        attacker.getMovelist().set(moveNum, move);
 
         return damage;
     }
@@ -277,4 +284,31 @@ public class Battle
         return critical;
     }
 
+    public int mewtwoMovePicker(Pokemon mewtwo, Pokemon defender)
+    {
+        int move;
+
+        if(mewtwo.getCurrentHP() < (mewtwo.getbaseHP() / 4) && mewtwo.getMovelist().get(3).getPp() > 0)
+        {
+            move = 3;
+            return move;
+        }
+
+        if(defender.getType1().equals("Water") || defender.getType1().equals("Flying") && mewtwo.getMovelist().get(1).getPp() > 0)
+        {
+            move = 1;
+            return move;
+        }
+
+        if(defender.getType1().equals("Flying") || defender.getType1().equals("Dragon")
+                || defender.getType1().equals("Grass") || defender.getType1().equals("Ground")
+                && mewtwo.getMovelist().get(2).getPp() > 0)
+        {
+            move = 2;
+            return move;
+        }
+
+
+        return 0; //standard mewtwo attack: Psychic
+    }
 }

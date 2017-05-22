@@ -14,7 +14,7 @@ public class Player
     {
         return this.player_name;
     }
-    public ArrayList getPokemonList()
+    public ArrayList<Pokemon> getPokemonList()
     {
         return this.pokemonList;
     }

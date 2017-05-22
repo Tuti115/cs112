@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Random;
 
 public class Gui extends JFrame
 {
@@ -34,13 +35,19 @@ public class Gui extends JFrame
 
     //labels
     private JLabel label;
-    private JLabel player_Poke;
+    private JLabel current_Poke;
     private JLabel wild_Poke;
 
-    private JLabel player_name;
+    private JLabel current_name;
     private JLabel wild_name;
-    private JLabel player_health;
+    private JLabel current_health;
     private JLabel wild_health;
+
+    private JLabel pokeIcon1;
+    private JLabel pokeIcon2;
+    private JLabel pokeIcon3;
+    private JLabel pokeIcon4;
+    private JLabel pokeIcon5;
 
     //TextArea
 
@@ -81,6 +88,8 @@ public class Gui extends JFrame
     private Audio audioplayer = new Audio();
     private boolean over = false;
     private Battle battle = new Battle();
+    private Random r = new Random();
+
     /* Constructor */
     public Gui()
     {
@@ -111,7 +120,8 @@ public class Gui extends JFrame
         start_panel.add(label);
         start_panel.add(start_button);
 
-        setPokemonIcons();
+        setBattleIcons();
+
     }
 
     public void startGamePanel()
@@ -146,6 +156,8 @@ public class Gui extends JFrame
 
         move1 = new JButton(current_moveNames[0]);
         move1.setMargin(new java.awt.Insets(1, 2, 1, 2));
+        move1.addActionListener(new move1Button());
+
         move2 = new JButton(current_moveNames[1]);
         move2.setMargin(new java.awt.Insets(1, 2, 1, 2));
 
@@ -201,37 +213,37 @@ public class Gui extends JFrame
         battle_panel = new JPanel();
         battle_panel.setLayout(null);
 
-        player_name = new JLabel(current.getName() + " LVL: " + current.getLevel());
+        current_name = new JLabel(current.getName() + " LVL: " + current.getLevel());
         wild_name = new JLabel(wild.getName() + " LVL: " + wild.getLevel());
-        player_health = new JLabel("Health: " + current.passCurrentHP());
+        current_health = new JLabel("Health: " + current.passCurrentHP());
         wild_health = new JLabel("Health: " + wild.passCurrentHP());
 
-        player_name.setBounds(260, 150, 150, 40);
-        player_health.setBounds(260, 174, 150, 20);
+        current_name.setBounds(260, 150, 150, 40);
+        current_health.setBounds(260, 174, 150, 20);
 
         wild_name.setBounds(70, 30, 150,40);
         wild_health.setBounds(70, 55, 150, 20);
 
 
 
-        player_name.repaint();
-        player_health.repaint();
+        current_name.repaint();
+        current_health.repaint();
         wild_name.repaint();
         wild_health.repaint();
 
-        Dimension player = player_Poke.getPreferredSize();
+        Dimension player = current_Poke.getPreferredSize();
         Dimension wild = wild_Poke.getPreferredSize();
 
         wild_Poke.setBounds(265, 50, wild.width, wild.height);
-        player_Poke.setBounds(70, 140, player.width, player.height);
+        current_Poke.setBounds(70, 140, player.width, player.height);
 
-        battle_panel.add(player_name);
-        battle_panel.add(player_health);
+        battle_panel.add(current_name);
+        battle_panel.add(current_health);
 
         battle_panel.add(wild_name);
         battle_panel.add(wild_health);
 
-        battle_panel.add(player_Poke);
+        battle_panel.add(current_Poke);
         battle_panel.add(wild_Poke);
 
         battle_panel.setBackground(Color.GREEN);
@@ -260,6 +272,47 @@ public class Gui extends JFrame
         return bag_panel;
     }
 
+    public JPanel buildPokePanel()
+    {
+        setAllPokemonIcons();
+
+        poke_panel = new JPanel(new GridLayout(3, 4));
+        poke_panel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+
+        poke1 = new JButton(player.getPokemonList().get(0).getName());
+        poke1.addActionListener(new poke1Button());
+
+
+        poke2 = new JButton(player.getPokemonList().get(1).getName());
+        poke2.addActionListener(new poke2Button());
+
+
+        poke3 = new JButton(player.getPokemonList().get(2).getName());
+        poke3.addActionListener(new poke3Button());
+
+        poke4 = new JButton(player.getPokemonList().get(3).getName());
+        poke4.addActionListener(new poke4Button());
+
+        poke5 = new JButton(player.getPokemonList().get(4).getName());
+        poke5.addActionListener(new poke5Button());
+
+        poke_panel.add(pokeIcon1);
+        poke_panel.add(poke1);
+
+        poke_panel.add(pokeIcon2);
+        poke_panel.add(poke2);
+
+        poke_panel.add(pokeIcon3);
+        poke_panel.add(poke3);
+
+        poke_panel.add(pokeIcon4);
+        poke_panel.add(poke4);
+
+        poke_panel.add(pokeIcon5);
+        poke_panel.add(poke5);
+
+        return poke_panel;
+    }
 
     /*
     public static JPanel buildEndScreen()
@@ -267,87 +320,6 @@ public class Gui extends JFrame
         return
     }
     */
-
-    /* Misc. Methods */
-    public void setPlayer_PokeIcon(int poke)
-    {
-        switch(poke)
-        {
-
-            case 0:
-                try
-                {
-                    sprite = ImageIO.read(new File("Pokemon Files/Sprites/pikachu_back.png"));
-                    player_Poke = new JLabel(new ImageIcon(sprite));
-                    break;
-                }
-                catch (IOException e)
-                {
-                    System.out.println("IO EXCEPTION THROWN. EXITING.");
-                    System.exit(0);
-                }
-            case 1:
-                try
-                {
-                    sprite = ImageIO.read(new File("Pokemon Files/Sprites/charizard_back.png"));
-                    player_Poke = new JLabel(new ImageIcon(sprite));
-                    break;
-                }
-                catch (IOException e)
-                {
-                    System.out.println("IO EXCEPTION THROWN. EXITING.");
-                    System.exit(0);
-                }
-            case 2:
-                try
-                {
-                    sprite = ImageIO.read(new File("Pokemon Files/Sprites/blastoise_back.png"));
-                    player_Poke = new JLabel(new ImageIcon(sprite));
-                    break;
-                }
-                catch (IOException e)
-                {
-                    System.out.println("IO EXCEPTION THROWN. EXITING.");
-                    System.exit(0);
-                }
-            case 3:
-                try
-                {
-                    sprite = ImageIO.read(new File("Pokemon Files/Sprites/venusaur_back.png"));
-                    player_Poke = new JLabel(new ImageIcon(sprite));
-                    break;
-                }
-                catch (IOException e)
-                {
-                    System.out.println("IO EXCEPTION THROWN. EXITING.");
-                    System.exit(0);
-                }
-            case 4:
-                try
-                {
-                    sprite = ImageIO.read(new File("Pokemon Files/Sprites/dragonite_back.png"));
-                    player_Poke = new JLabel(new ImageIcon(sprite));
-                    break;
-                }
-                catch (IOException e)
-                {
-                    System.out.println("IO EXCEPTION THROWN. EXITING.");
-                    System.exit(0);
-                }
-            default:
-                try
-                {
-                    sprite = ImageIO.read(new File("Pokemon Files/Sprites/bulbasaur_back.png"));
-                    player_Poke = new JLabel(new ImageIcon(sprite));
-                    break;
-                }
-                catch (IOException e)
-                {
-                    System.out.println("IO EXCEPTION THROWN. EXITING.");
-                    System.exit(0);;
-                }
-        }
-    }
 
     /* Button Inner Classes */
 
@@ -383,6 +355,64 @@ public class Gui extends JFrame
         public void actionPerformed(ActionEvent e)
         {
 
+            int temp = r.nextInt(100 - 1) + 1;
+            int mewtwoMove = battle.mewtwoMovePicker(wild, current);
+
+            if((temp % 2)  == 0)
+            {
+
+                battle.doMove(current, 1, wild); //does first move
+
+                if(battle.isWildBattleOver(player, wild)) //checks if first move causes battle to be over
+                {
+                    //endpanel placeholder
+                    System.out.println("BATTLE OVER!");
+                    System.exit(0);
+                }
+
+                if(current.getCurrentHP() < 1)
+                {
+
+                }
+
+                battle.doMove(wild, mewtwoMove, current); //does second move
+
+                if(battle.isWildBattleOver(player, wild)) //checks if second move causes battle to be over
+                {
+                    //endpanel placeholder
+                    System.out.println("BATTLE OVER!");
+                    System.exit(0);
+                }
+
+            }
+
+            else
+            {
+                battle.doMove(wild, mewtwoMove, current); //does wild Poke move
+
+                if(battle.isWildBattleOver(player, wild)) //checks if wild's move ends battle
+                {
+                    //endpanel placeholder
+                    System.out.println("BATTLE OVER!");
+                    System.exit(0);
+                }
+
+                battle.doMove(current, 1, wild); //does Player move
+
+                if(battle.isWildBattleOver(player, wild)) //checks if player's move ends battle
+                {
+                    //endpanel placeholder
+                    System.out.println("BATTLE OVER!");
+                    System.exit(0);
+                }
+
+
+            }
+
+            buildGamePanel(buildDecisionPanel());
+            setContentPane(game_panel);
+            invalidate();
+            validate();
 
         }
     }
@@ -405,7 +435,9 @@ public class Gui extends JFrame
     {
         public void actionPerformed(ActionEvent e)
         {
-
+            setContentPane(buildPokePanel());
+            invalidate();
+            validate();
         }
     }
 
@@ -417,7 +449,6 @@ public class Gui extends JFrame
         }
     }
 
-
     private class goBack_button implements  ActionListener
     {
         public void actionPerformed(ActionEvent e)
@@ -427,6 +458,106 @@ public class Gui extends JFrame
             invalidate();
             validate();
         }
+    }
+
+    private class poke1Button implements ActionListener
+    {
+        public void actionPerformed(ActionEvent e)
+        {
+            if(player.getPokemonList().get(0).getCurrentHP() < 1)
+            {
+                JOptionPane.showMessageDialog(null, player.getPokemonList().get(0).getName() +
+                        " has fainted! Unable to battle.");
+
+                setContentPane(buildPokePanel());
+                invalidate();
+                validate();
+
+            }
+
+            current = player.getPokemonList().get(0);
+            setCurrent_PokeIcon(0);
+
+            buildGamePanel(buildDecisionPanel());
+            setContentPane(game_panel);
+            invalidate();
+            validate();
+
+        }
+
+    }
+
+    private class poke2Button implements ActionListener
+    {
+        public void actionPerformed(ActionEvent e)
+        {
+            if(player.getPokemonList().get(1).getCurrentHP() < 1)
+            {
+                JOptionPane.showMessageDialog(null, player.getPokemonList().get(1).getName() +
+                        " has fainted! Unable to battle.");
+
+                setContentPane(buildPokePanel());
+                invalidate();
+                validate();
+
+            }
+
+            current = player.getPokemonList().get(1);
+            setCurrent_PokeIcon(1);
+
+            buildGamePanel(buildDecisionPanel());
+            setContentPane(game_panel);
+            invalidate();
+            validate();
+
+        }
+
+
+    }
+
+    private class poke3Button implements ActionListener
+    {
+        public void actionPerformed(ActionEvent e)
+        {
+            current = player.getPokemonList().get(2);
+            setCurrent_PokeIcon(2);
+
+            buildGamePanel(buildDecisionPanel());
+            invalidate();
+            validate();
+
+        }
+
+    }
+
+    private class poke4Button implements ActionListener
+    {
+        public void actionPerformed(ActionEvent e)
+        {
+            current = player.getPokemonList().get(3);
+            setCurrent_PokeIcon(3);
+
+            buildGamePanel(buildDecisionPanel());
+            invalidate();
+            validate();
+
+        }
+
+    }
+
+    private class poke5Button implements ActionListener
+    {
+        public void actionPerformed(ActionEvent e)
+        {
+            current = player.getPokemonList().get(4);
+            setCurrent_PokeIcon(4);
+
+            buildGamePanel(buildDecisionPanel());
+            invalidate();
+            validate();
+
+        }
+
     }
 
     /* SwingWorker inner */
@@ -447,7 +578,7 @@ public class Gui extends JFrame
     }
 
     /* Other methods */
-    public void setPokemonIcons()
+    public void setBattleIcons()
     {
         try
         {
@@ -460,8 +591,117 @@ public class Gui extends JFrame
             System.exit(0);
         }
 
-        setPlayer_PokeIcon(0);
+        setCurrent_PokeIcon(0);
     }
+
+    public void setAllPokemonIcons()
+    {
+        try
+        {
+            sprite = ImageIO.read(new File("Pokemon Files/Sprites/pikachu_front.png"));
+            pokeIcon1 = new JLabel(new ImageIcon(sprite));
+
+            sprite = ImageIO.read(new File("Pokemon Files/Sprites/charizard_front.png"));
+            pokeIcon2 = new JLabel(new ImageIcon(sprite));
+
+            sprite = ImageIO.read(new File("Pokemon Files/Sprites/blastoise_front.png"));
+            pokeIcon3 = new JLabel(new ImageIcon(sprite));
+
+            sprite = ImageIO.read(new File("Pokemon Files/Sprites/venusaur_front.png"));
+            pokeIcon4 = new JLabel(new ImageIcon(sprite));
+
+            sprite = ImageIO.read(new File("Pokemon Files/Sprites/dragonite_front.png"));
+            pokeIcon5 = new JLabel(new ImageIcon(sprite));
+
+        }
+        catch (IOException e)
+        {
+            System.out.println("IO EXECPTION THROWN. EXITING.");
+            System.exit(0);
+        }
+    }
+
+    public void setCurrent_PokeIcon(int poke)
+    {
+        switch(poke)
+        {
+
+            case 0:
+                try
+                {
+                    sprite = ImageIO.read(new File("Pokemon Files/Sprites/pikachu_back.png"));
+                    current_Poke = new JLabel(new ImageIcon(sprite));
+                    break;
+                }
+                catch (IOException e)
+                {
+                    System.out.println("IO EXCEPTION THROWN. EXITING.");
+                    System.exit(0);
+                }
+            case 1:
+                try
+                {
+                    sprite = ImageIO.read(new File("Pokemon Files/Sprites/charizard_back.png"));
+                    current_Poke = new JLabel(new ImageIcon(sprite));
+                    break;
+                }
+                catch (IOException e)
+                {
+                    System.out.println("IO EXCEPTION THROWN. EXITING.");
+                    System.exit(0);
+                }
+            case 2:
+                try
+                {
+                    sprite = ImageIO.read(new File("Pokemon Files/Sprites/blastoise_back.png"));
+                    current_Poke = new JLabel(new ImageIcon(sprite));
+                    break;
+                }
+                catch (IOException e)
+                {
+                    System.out.println("IO EXCEPTION THROWN. EXITING.");
+                    System.exit(0);
+                }
+            case 3:
+                try
+                {
+                    sprite = ImageIO.read(new File("Pokemon Files/Sprites/venusaur_back.png"));
+                    current_Poke = new JLabel(new ImageIcon(sprite));
+                    break;
+                }
+                catch (IOException e)
+                {
+                    System.out.println("IO EXCEPTION THROWN. EXITING.");
+                    System.exit(0);
+                }
+            case 4:
+                try
+                {
+                    sprite = ImageIO.read(new File("Pokemon Files/Sprites/dragonite_back.png"));
+                    current_Poke = new JLabel(new ImageIcon(sprite));
+                    break;
+                }
+                catch (IOException e)
+                {
+                    System.out.println("IO EXCEPTION THROWN. EXITING.");
+                    System.exit(0);
+                }
+            default:
+                try
+                {
+                    sprite = ImageIO.read(new File("Pokemon Files/Sprites/bulbasaur_back.png"));
+                    current_Poke = new JLabel(new ImageIcon(sprite));
+                    break;
+                }
+                catch (IOException e)
+                {
+                    System.out.println("IO EXCEPTION THROWN. EXITING.");
+                    System.exit(0);;
+                }
+        }
+    }
+
+
 
 
 
