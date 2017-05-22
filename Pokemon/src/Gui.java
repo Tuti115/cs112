@@ -2,6 +2,7 @@
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,7 +14,7 @@ public class Gui extends JFrame
 {
 
     /* FINAL VALUES */
-    public static final int WINDOW_HEIGHT = 400;
+    public static final int WINDOW_HEIGHT = 300;
     public static final int WINDOW_WIDTH = 400;
 
     /* Declarations */
@@ -52,6 +53,7 @@ public class Gui extends JFrame
     private JButton move2;
     private JButton move3;
     private JButton move4;
+    private JButton goBack;
 
     private JButton pokemon;
     private JButton poke1;
@@ -68,17 +70,17 @@ public class Gui extends JFrame
     private JButton cancel;
     private JButton run;
 
-    private Pokemon wild = Pokemon.generateMewtwo();
-
     //images
     private BufferedImage sprite;
 
     /* Initializations */
+    private Pokemon wild = Pokemon.generateMewtwo();
     private Player player = Player.initializePlayerRed();
     private Pokemon current = (Pokemon) player.getPokemonList().get(0);
+
     private Audio audioplayer = new Audio();
-
-
+    private boolean over = false;
+    private Battle battle = new Battle();
     /* Constructor */
     public Gui()
     {
@@ -126,9 +128,15 @@ public class Gui extends JFrame
 
     }
 
-    public void buildGamePanel(JPanel player_panel)
+    public void buildGamePanel(JPanel panel)
     {
+        game_panel = new JPanel(new BorderLayout());
 
+        player_panel = panel;
+        battle_panel = buildBattlePanel();
+
+        game_panel.add(player_panel, BorderLayout.PAGE_END);
+        game_panel.add(battle_panel, BorderLayout.CENTER);
 
     }
     public JPanel buildMovePanel()
@@ -137,17 +145,30 @@ public class Gui extends JFrame
         String[] current_moveNames = current.getMoveNames();
 
         move1 = new JButton(current_moveNames[0]);
+        move1.setMargin(new java.awt.Insets(1, 2, 1, 2));
         move2 = new JButton(current_moveNames[1]);
-        move3 = new JButton(current_moveNames[2]);
-        move4 = new JButton(current_moveNames[3]);
+        move2.setMargin(new java.awt.Insets(1, 2, 1, 2));
 
-        move_panel = new JPanel();
+        move3 = new JButton(current_moveNames[2]);
+        move3.setMargin(new java.awt.Insets(1, 2, 1, 2));
+        move4 = new JButton(current_moveNames[3]);
+        move4.setMargin(new java.awt.Insets(1, 2, 1, 2));
+
+        goBack = new JButton("Back");
+        goBack.setMargin(new java.awt.Insets(1, 2, 1, 2));
+        goBack.addActionListener(new goBack_button());
+
+
+        move_panel = new JPanel(new GridLayout(3, 2, 2, 2));
+        move_panel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 
         move_panel.add(move1);
         move_panel.add(move2);
         move_panel.add(move3);
         move_panel.add(move4);
+        move_panel.add(goBack);
 
+        move_panel.setBackground(Color.BLACK);
         return move_panel;
     }
 
@@ -171,8 +192,10 @@ public class Gui extends JFrame
         decision_panel.add(pokemon);
         decision_panel.add(run);
 
+        decision_panel.setBackground(Color.BLACK);
         return decision_panel;
     }
+
     public JPanel buildBattlePanel()
     {
         battle_panel = new JPanel();
@@ -183,11 +206,13 @@ public class Gui extends JFrame
         player_health = new JLabel("Health: " + current.passCurrentHP());
         wild_health = new JLabel("Health: " + wild.passCurrentHP());
 
-        player_name.setBounds(280, 238, 150, 40);
-        wild_name.setBounds(85, 50, 150,40);
+        player_name.setBounds(260, 150, 150, 40);
+        player_health.setBounds(260, 174, 150, 20);
 
-        player_health.setBounds(280, 263, 150, 20);
-        wild_health.setBounds(85, 75, 150, 20);
+        wild_name.setBounds(70, 30, 150,40);
+        wild_health.setBounds(70, 55, 150, 20);
+
+
 
         player_name.repaint();
         player_health.repaint();
@@ -197,8 +222,8 @@ public class Gui extends JFrame
         Dimension player = player_Poke.getPreferredSize();
         Dimension wild = wild_Poke.getPreferredSize();
 
-        wild_Poke.setBounds(280, 50, wild.width, wild.height);
-        player_Poke.setBounds(85, 238, player.width, player.height);
+        wild_Poke.setBounds(265, 50, wild.width, wild.height);
+        player_Poke.setBounds(70, 140, player.width, player.height);
 
         battle_panel.add(player_name);
         battle_panel.add(player_health);
@@ -209,24 +234,40 @@ public class Gui extends JFrame
         battle_panel.add(player_Poke);
         battle_panel.add(wild_Poke);
 
+        battle_panel.setBackground(Color.GREEN);
         return battle_panel;
     }
 
 
     public JPanel buildBagPanel()
     {
-        bag_panel = new JPanel(new BoxLayout(bag_panel, BoxLayout.Y_AXIS));
+        bag_panel = new JPanel();
+        bag_panel.setLayout(new BoxLayout(getContentPane(), BoxLayout.Y_AXIS));
+
         item1 = new JButton("Item 1");
         item2 = new JButton("Item 2");
         item3 = new JButton("Item 3");
-        cancel = new JButton("Cancel");
+        goBack = new JButton("Back");
 
         bag_panel.add(item1);
         bag_panel.add(item2);
         bag_panel.add(item3);
+        bag_panel.add(goBack);
+
+        goBack.addActionListener(new goBack_button());
+        pack();
 
         return bag_panel;
     }
+
+
+    /*
+    public static JPanel buildEndScreen()
+    {
+        return
+    }
+    */
+
     /* Misc. Methods */
     public void setPlayer_PokeIcon(int poke)
     {
@@ -309,20 +350,11 @@ public class Gui extends JFrame
     }
 
     /* Button Inner Classes */
-    private class runAwayButton implements ActionListener
-    {
-        public void actionPerformed(ActionEvent e)
-        {
-
-        }
-    }
 
     private class startGameButton implements ActionListener
     {
         public void actionPerformed(ActionEvent a)
         {
-            AudioSwingHelper helper = new AudioSwingHelper();
-
             startGamePanel();
             setContentPane(game_panel);
 
@@ -337,22 +369,32 @@ public class Gui extends JFrame
     {
         public void actionPerformed(ActionEvent e)
         {
-            buildMovePanel();
-
+            buildGamePanel(buildMovePanel());
             setContentPane(game_panel);
             invalidate();
             validate();
         }
     }
 
-    private class bagButton implements ActionListener
+
+
+    private class move1Button implements ActionListener
     {
         public void actionPerformed(ActionEvent e)
         {
 
-            buildBagPanel();
 
-            setContentPane(game_panel);
+        }
+    }
+
+
+
+
+    private class bagButton implements ActionListener
+    {
+        public void actionPerformed(ActionEvent e)
+        {
+            setContentPane(buildBagPanel());
             invalidate();
             validate();
 
@@ -367,11 +409,23 @@ public class Gui extends JFrame
         }
     }
 
-    private class cancelBagItemButton implements ActionListener
+    private class runAwayButton implements ActionListener
     {
         public void actionPerformed(ActionEvent e)
         {
 
+        }
+    }
+
+
+    private class goBack_button implements  ActionListener
+    {
+        public void actionPerformed(ActionEvent e)
+        {
+            buildGamePanel(buildDecisionPanel());
+            setContentPane(game_panel);
+            invalidate();
+            validate();
         }
     }
 
@@ -408,5 +462,8 @@ public class Gui extends JFrame
 
         setPlayer_PokeIcon(0);
     }
+
+
+
 
 }

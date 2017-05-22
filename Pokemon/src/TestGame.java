@@ -1,3 +1,5 @@
+import java.util.Random;
+
 /*
 
 Project: Pokemon
@@ -16,9 +18,7 @@ public class TestGame
 {
     public static void main(String[] args)
     {
-        Gui event = new Gui();
-
-
+       Gui event = new Gui();
 
     }
 

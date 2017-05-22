@@ -95,26 +95,79 @@ public class Battle
         return false;
     }
 
-    public void calculateSpecialMove(Pokemon pokemon, int index)
+    /*
+    public void doRound(Player player, Pokemon player_poke, Pokemon wild, int playerMove, int wildMove)
+    {
+        int random = r.nextInt(100 - 1) + 1;
+
+        if((random % 2) == 0)
+        {
+            if (isWildBattleOver(player, wild))
+
+        }
+
+
+
+
+
+
+    }
+
+    */
+
+    public void doMove(Pokemon attacker, int index, Pokemon defender)
     {
 
-        String name = pokemon.getMovelist().get(index).getMove_name();
+        String name = attacker.getMovelist().get(index).getMove_name();
+        boolean isSpecialMove = false;
+        double dRandom;
+
+        int damage, modifier;
 
         switch(name)
         {
             case "Recover":
                 int random = r.nextInt(50) + 25 ;
-                double dRandom = random / 100;
+                dRandom = random / 100;
 
-                double temp = pokemon.getbaseHP() * dRandom;
-                int recover = (int) temp;
+                modifier = (int) (attacker.getbaseHP() * dRandom);
 
-                pokemon.addHP(recover);
+                attacker.addHP(modifier);
+                isSpecialMove = true;
                 break;
+
             case "Volt Tackle":
+                modifier= (int )(calculateMoveEffectiveness(attacker, index, defender) * .33);
+                damage = (int) calculateMoveEffectiveness(attacker, index, defender);
 
+                defender.lowerCurrentHP(damage);
+                attacker.lowerCurrentHP(modifier);
+                isSpecialMove = true;
 
+                break;
+
+            case "Giga Drain":
+
+                damage = (int) calculateMoveEffectiveness(attacker, index, defender);
+                modifier = damage / 2;
+
+                defender.lowerCurrentHP(damage);
+                attacker.addHP(modifier);
+                isSpecialMove = true;
+
+                break;
+
+            default:
+                //did not find anything
+                break;
         }
+
+        if(isSpecialMove)
+            return;
+
+        damage = (int)calculateMoveEffectiveness(attacker, index, defender);
+        defender.lowerCurrentHP(damage);
+
     }
 
     public double calculateMoveEffectiveness(Pokemon attacker, int moveNum, Pokemon defender)

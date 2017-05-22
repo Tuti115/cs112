@@ -72,6 +72,7 @@ public class Pokemon
     {
         return this.movelist;
     }
+
     /* Mutator Methods */
     public void setName(String name)
     {
@@ -168,26 +169,6 @@ public class Pokemon
 
     }
 
-    /* Methods */
-    public String[] getMoveNames()
-    {
-        String[] moves = new String[4];
-        int counter= 0;
-
-        for(Move move: getMovelist())
-        {
-            moves[counter] = move.getMove_name();
-            counter++;
-        }
-
-        return moves;
-    }
-    public String passCurrentHP()
-    {
-        String hp = String.valueOf(getCurrentHP());
-        return hp;
-    }
-
     /* Generation of Pokemons */
     public static Pokemon generatePikachu()
     {
@@ -203,15 +184,15 @@ public class Pokemon
         int HP, currentHP, speed;
         double attack, defense, specialAttack, specialDef;
 
-        HP = rand.nextInt(243) + 211;
+        HP = rand.nextInt(243 -210) + 211;
         currentHP = HP;
 
-        attack = rand.nextInt(202) + 166;
+        attack = rand.nextInt(202 - 165) + 166;
         defense = rand.nextInt(154) + 126;
 
-        specialAttack = rand.nextInt(193) + 163;
-        specialDef = rand.nextInt(173) + 142;
-        speed = rand.nextInt(270) + 221;
+        specialAttack = rand.nextInt(193 - 164) + 163;
+        specialDef = rand.nextInt(173 - 143) + 142;
+        speed = rand.nextInt(270 - 222) + 221;
 
         Move move1 = new Move("Volt Tackle", "Electric", 120, isSpecial,
                                 0.33, 15,
@@ -252,14 +233,14 @@ public class Pokemon
         int HP, current, speed;
         double attack, defense, specialAttack, specialDef;
 
-        HP = rand.nextInt(327) + 290;
+        HP = rand.nextInt(328 - 291) + 290;
         current =  HP;
-        attack = rand.nextInt(247) + 202;
-        defense = rand.nextInt(236) + 193;
+        attack = rand.nextInt(247 - 203) + 202;
+        defense = rand.nextInt(236 - 194) + 193;
 
-        specialAttack = rand.nextInt(293) + 240;
-        specialDef = rand.nextInt(249) + 204;
-        speed = rand.nextInt(277) + 226;
+        specialAttack = rand.nextInt(293 - 241) + 240;
+        specialDef = rand.nextInt(249 - 205) + 204;
+        speed = rand.nextInt(277 - 227) + 226;
 
 
         Move move1 = new Move("Flamethrower", "Fire", 90, isSpecial,
@@ -296,14 +277,14 @@ public class Pokemon
         int HP, current, speed;
         double attack, defense, specialAttack, specialDef;
 
-        HP = rand.nextInt(325) + 305;
+        HP = rand.nextInt(325 - 306) + 305;
         current  = HP;
-        attack = rand.nextInt(245) + 202;
-        defense = rand.nextInt(277) + 226;
+        attack = rand.nextInt(245 - 203) + 202;
+        defense = rand.nextInt(277 - 227) + 226;
 
-        specialAttack = rand.nextInt(249) + 204;
-        specialDef = rand.nextInt(286) + 234;
-        speed = rand.nextInt(236) + 196;
+        specialAttack = rand.nextInt(249 - 205) + 204;
+        specialDef = rand.nextInt(286 - 235) + 234;
+        speed = rand.nextInt(236 - 197) + 196;
 
 
         Move move1 = new Move("Surf", "Water", 90, isSpecial,
@@ -340,14 +321,14 @@ public class Pokemon
         int HP, current, speed;
         double attack, defense, specialAttack, specialDef;
 
-        HP = rand.nextInt(327) + 280;
+        HP = rand.nextInt(327 - 281) + 280;
         current = HP;
-        attack = rand.nextInt(243) + 199;
-        defense = rand.nextInt(245) + 201;
+        attack = rand.nextInt(243 - 200) + 199;
+        defense = rand.nextInt(245 - 202) + 201;
 
-        specialAttack = rand.nextInt(277) + 226;
-        specialDef = rand.nextInt(277) + 226;
-        speed = rand.nextInt(240) + 196;
+        specialAttack = rand.nextInt(277 -227) + 226;
+        specialDef = rand.nextInt(277 - 227) + 226;
+        speed = rand.nextInt(240 - 197) + 196;
 
 
         Move move1 = new Move("Sludge Bomb", "Poison", 90, notSpecial,
@@ -384,14 +365,14 @@ public class Pokemon
         int HP, current, speed;
         double attack, defense, specialAttack, specialDef;
 
-        HP = rand.nextInt(340) + 320;
+        HP = rand.nextInt(340 - 321) + 320;
         current = HP;
-        attack = rand.nextInt(343) + 281;
-        defense = rand.nextInt(271) + 221;
+        attack = rand.nextInt(343 - 282) + 281;
+        defense = rand.nextInt(271 - 222) + 221;
 
-        specialAttack = rand.nextInt(280) + 229;
-        specialDef = rand.nextInt(280) + 229;
-        speed = rand.nextInt(242) + 198;
+        specialAttack = rand.nextInt(280 - 230) + 229;
+        specialDef = rand.nextInt(280 - 230) + 229;
+        speed = rand.nextInt(242 - 199) + 198;
 
         Move move1 = new Move("Outrage", "Dragon", 120, isSpecial,
                 rand.nextInt(3) + 2, 10, 1, 1.5, 200);
@@ -427,14 +408,14 @@ public class Pokemon
         int HP, current, speed;
         double attack, defense, specialAttack, specialDef;
 
-        HP = rand.nextInt(354) + 300;
+        HP = rand.nextInt(354 - 301) + 300;
         current  = HP;
-        attack = rand.nextInt(281) + 230;
-        defense = rand.nextInt(246) + 201;
+        attack = rand.nextInt(281 - 231) + 230;
+        defense = rand.nextInt(246 - 202) + 201;
 
-        specialAttack = rand.nextInt(359) + 293;
-        specialDef = rand.nextInt(246) + 201;
-        speed = rand.nextInt(317) + 259;
+        specialAttack = rand.nextInt(359 - 294) + 293;
+        specialDef = rand.nextInt(246 - 202) + 201;
+        speed = rand.nextInt(317 - 260) + 259;
 
         Move move1 = new Move("Psychic", "Psychic", 90, isSpecial,
                 0.0, 10, 1, 1.5, 94);
@@ -463,7 +444,31 @@ public class Pokemon
         this.currentHP += hp;
     }
 
+    public String passCurrentHP()
+    {
+        String hp = String.valueOf(getCurrentHP());
+        return hp;
+    }
 
+    public void lowerCurrentHP(int damage)
+    {
+        int temp = getCurrentHP() - damage;
+        setCurrentHP(temp);
+    }
+
+    public String[] getMoveNames()
+    {
+        String[] moves = new String[4];
+        int counter= 0;
+
+        for(Move move: getMovelist())
+        {
+            moves[counter] = move.getMove_name();
+            counter++;
+        }
+
+        return moves;
+    }
     //toString
     public String toString()
     {
