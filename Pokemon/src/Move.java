@@ -15,7 +15,6 @@ public class Move
     private double stab;
     private int move_number;
 
-
     /* Accessor Methods */
     public String getMove_name()
     {

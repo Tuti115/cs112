@@ -5,7 +5,7 @@ import javax.sound.sampled.AudioSystem;
 
 public class Audio
 {
-
+/* Methods */
     public static void playBattleMusic()
     {
         File battlemusic = new File("Pokemon Files/Audio/EmeraldBattleMusic.wav");
@@ -24,9 +24,10 @@ public class Audio
 
             Thread.sleep(clip.getMicrosecondLength() / 1000);
 
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
-            System.out.println("Error with audio...");
+            System.out.println("ERROR WITH AUDIO. EXITING.");
             System.exit(0);
         }
 

@@ -48,11 +48,6 @@ public class Battle
 
     /* Methods */
 
-    public void doRound()
-    {
-
-    }
-
     public boolean isWildBattleOver(Player player, Pokemon wild)
     {
         boolean teamFainted = true;
@@ -85,39 +80,6 @@ public class Battle
         return false;
     }
 
-    public boolean effectMove(Move move)
-    {
-        if(move.getPower() <= 0 || move.getModifier() > 0)
-        {
-            return true;
-        }
-
-        return false;
-    }
-
-
-    public void doRound(Player player, Pokemon player_poke, Pokemon wild, int playerMove, int wildMove)
-    {
-        int random = r.nextInt(100 - 1) + 1;
-
-        if((random % 2) == 0)
-        {
-            if (isWildBattleOver(player, wild))
-            {
-
-            }
-
-        }
-
-
-
-
-
-
-    }
-
-
-
     public void doMove(Pokemon attacker, int index, Pokemon defender)
     {
 
@@ -130,8 +92,8 @@ public class Battle
         switch(name)
         {
             case "Recover":
-                int random = r.nextInt(50 - 2) + 25 ;
-                dRandom = random / 100;
+                int random = r.nextInt(50 - 26) + 25 ;
+                dRandom = random * .01;
 
                 modifier = (int) (attacker.getbaseHP() * dRandom);
 
@@ -185,7 +147,7 @@ public class Battle
         attackerlvl = attacker.getLevel();
         power = move.getPower();
         stab = move.getStab();
-        random = (rand.nextInt(100) + 85) / 100; //need to get a decimal
+        random = ( (rand.nextInt(100 - 70) + 69 ) * .01 ); //need to get a decimal
 
         if(!move.getIsSpecial())
         {
@@ -221,8 +183,6 @@ public class Battle
         int defenderNum = -1;
         int index = 0;
 
-
-
         while(attackerNum == -1)
         {
             try
@@ -241,7 +201,6 @@ public class Battle
         }
 
         index = 0;
-
         while(defenderNum == -1)
         {
             try
@@ -307,7 +266,6 @@ public class Battle
             move = 2;
             return move;
         }
-
 
         return 0; //standard mewtwo attack: Psychic
     }

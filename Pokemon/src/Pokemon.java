@@ -217,7 +217,6 @@ public class Pokemon
 
         return pikachu;
 
-
     }
 
     public static Pokemon generateCharizard()
